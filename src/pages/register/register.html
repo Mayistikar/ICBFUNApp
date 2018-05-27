@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>register</ion-title>
+  <ion-navbar color="icbf">
+    <ion-title><b>REGISTRO</b></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,30 +19,39 @@
     </ion-card>
   </ng-template>
 
-  <button ion-button block item-left (click)="takePhotoRegister()">
+  <button ion-button block round item-left (click)="takePhotoRegister()">
     <ion-icon name="camera"></ion-icon>
   </button>
+
+  <br>
 
   <form>
 
     <ion-item>
+      <ion-label>Documento:</ion-label>
+      <ion-input type="text" [(ngModel)]="data.DocumentId" name="DocumentId"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo Documento:</ion-label>
+      <ion-select [(ngModel)]="data.DocumentType" name="DocumentType">
+        <ion-option value="ti">Tarjeta de Identidad</ion-option>
+        <ion-option value="rc">Registro Civil</ion-option>
+        <ion-option value="cc">Cédula de Ciudadanía</ion-option>
+        <ion-option value="ot">Otro</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
       <ion-label>Nombre:</ion-label>
-      <ion-input type="text" [(ngModel)]="user.name" name="name"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Edad:</ion-label>
-      <ion-input type="text" [(ngModel)]="user.age" name="age"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Identificación:</ion-label>
-      <ion-input type="text" [(ngModel)]="user.ti" name="ti"></ion-input>
+      <ion-input type="text" [(ngModel)]="data.Name" name="Name"></ion-input>
     </ion-item>
 
     <ion-fab bottom right>
 
-      <button ion-fab mini (click)="agregarUsuario()"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab mini (click)="addNewUser()">
+        <ion-icon name="add"></ion-icon>
+      </button>
 
     </ion-fab>
 

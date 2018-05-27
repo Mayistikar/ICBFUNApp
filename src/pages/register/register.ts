@@ -12,11 +12,10 @@ export class RegisterPage {
 
   photoBase64: string;
   data = {
-    idDispositivo: 0,
-    numerDocumentoBeneficiario: '',
-    tipoDocumentoBeneficiario: '',
-    fechaHoraEnrolamiento: '',
-    caracteristicasRostro: ''
+    DeviceId: '100110',
+    DocumentId: '',
+    DocumentType: '',
+    Name: ''
   }
 
   constructor(public navCtrl: NavController,
@@ -32,13 +31,15 @@ export class RegisterPage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
      // If it's base64:
      this.photoBase64 = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
       console.log("Error en cámara", JSON.stringify(err));
-
     });
+  }
+
+  addNewUser(){
+    console.log("Data: "+this.data.DeviceId);
   }
 
 }
