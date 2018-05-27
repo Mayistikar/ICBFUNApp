@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item *ngIf="photoBase64; else noPhoto">
+    <img [src]="photoBase64">
+  </ion-item>
+
+  <ng-template #noPhoto>
+    <ion-card>
+        <img src="assets/imgs/noPhoto.png">
+    </ion-card>
+  </ng-template>
+
+  <button ion-button block item-left (click)="takePhotoRegister()">
+    <ion-icon name="camera"></ion-icon>
+  </button>
+
+  <form>
+
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-input type="text" [(ngModel)]="user.name" name="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Edad:</ion-label>
+      <ion-input type="text" [(ngModel)]="user.age" name="age"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Identificación:</ion-label>
+      <ion-input type="text" [(ngModel)]="user.ti" name="ti"></ion-input>
+    </ion-item>
+
+    <ion-fab bottom right>
+
+      <button ion-fab mini (click)="agregarUsuario()"><ion-icon name="add"></ion-icon></button>
+
+    </ion-fab>
+
+  </form>
+
+</ion-content>

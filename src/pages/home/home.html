@@ -1,14 +1,24 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-content padding color="icbf">
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card>
+    <img src="assets/imgs/icbf.png">
+  </ion-card>
+
+  <ion-list>
+    <ion-item color="icbf" [navPush]="registerPage">
+      <ion-avatar item-left>
+        <img src="assets/imgs/camera.png">
+      </ion-avatar>
+      <h1><b>Registro</b></h1>
+    </ion-item>
+
+    <ion-item color="icbf" [navPush]="attendancePage">
+      <ion-avatar item-left>
+        <img src="assets/imgs/list.png">
+      </ion-avatar>
+      <h1><b>Asistencia</b></h1>
+    </ion-item>
+
+  </ion-list>
+
 </ion-content>
