@@ -4,6 +4,10 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+//Http Imports
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 //pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -12,6 +16,9 @@ import { AttendancePage } from '../pages/attendance/attendance';
 
 //plugins
 import { Camera } from '@ionic-native/camera';
+
+//services
+import { UserService } from '../providers/user-service/user-service';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,9 @@ import { Camera } from '@ionic-native/camera';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    HttpClientModule,
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,6 +44,7 @@ import { Camera } from '@ionic-native/camera';
     StatusBar,
     SplashScreen,
     Camera,
+    UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
