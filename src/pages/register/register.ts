@@ -14,7 +14,6 @@ import { UserService } from '../../providers/user-service/user-service';
 export class RegisterPage {
 
   photoBase64: string;
-  loading: any;
 
   data = {
     DeviceId: '100111',

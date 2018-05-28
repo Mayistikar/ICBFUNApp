@@ -27,6 +27,27 @@ export class UserService {
     console.log('Hello UserServiceProvider Provider');
   }
 
+  checkUser( photoBase64: string, load: any ){
+    let url = URL_SERVICE + "CHECK";
+
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(url, photoBase64, {
+        headers: new HttpHeaders().set('Content-Type', 'application/octet-stream')
+          .set('Filename', 'test2.jpeg') //NOMBRE IMAGEN PRUEBA
+      })
+        .subscribe(res => {
+          resolve(res);
+          //this.successAlert('Usuario agregado correctamente.');
+        }, (err) => {
+          reject(err);
+          this.errorAlert(err);
+        }, () => {
+          load.dismisAll()
+        });
+    });
+
+  }
+
   getPeople() {
     let url = URL_SERVICE + "PERSON";
 
