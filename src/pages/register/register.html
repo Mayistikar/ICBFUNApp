@@ -28,11 +28,6 @@
   <form>
 
     <ion-item>
-      <ion-label>Documento:</ion-label>
-      <ion-input type="text" [(ngModel)]="data.DocumentId" name="DocumentId"></ion-input>
-    </ion-item>
-
-    <ion-item>
       <ion-label>Tipo Documento:</ion-label>
       <ion-select [(ngModel)]="data.DocumentType" name="DocumentType">
         <ion-option value="TI">Tarjeta de Identidad</ion-option>
@@ -43,17 +38,18 @@
     </ion-item>
 
     <ion-item>
+      <ion-label>Documento:</ion-label>
+      <ion-input type="text" [(ngModel)]="data.DocumentId" name="DocumentId"></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label>Nombre:</ion-label>
       <ion-input type="text" [(ngModel)]="data.Name" name="Name"></ion-input>
     </ion-item>
-
-    <ion-fab bottom right>
-
-      <button ion-fab mini (click)="addNewUser()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-
-    </ion-fab>
+    <br>
+    <button ion-button block round item-left (click)="addNewUser()">
+      <ion-icon name="ios-create-outline" item-left></ion-icon> Registrar
+    </button>
 
   </form>
 

@@ -7,12 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>attendance</ion-title>
+    <ion-title>LLamar Asistencia</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-item *ngIf="photoBase64; else noPhoto">
+    <img [src]="photoBase64">
+  </ion-item>
 
+  <ng-template #noPhoto>
+    <ion-card>
+      <img src="assets/imgs/noPhoto.png">
+    </ion-card>
+  </ng-template>
+
+  <button ion-button block round item-left (click)="takePhotoRegister()">
+    <ion-icon name="camera"></ion-icon>
+  </button>
 </ion-content>

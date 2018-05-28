@@ -10,15 +10,20 @@ import 'rxjs/add/operator/map';
 //services
 import { URL_SERVICE } from '../../config/url.services';
 
+//components
+import { AlertController } from 'ionic-angular';
+
 
 
 @Injectable()
 export class UserService {
 
   people:any[] = [];
+  person:any[] = [];
 
   constructor(public http: Http,
-              public httpClient: HttpClient) {
+              public httpClient: HttpClient,
+              public alertCtrl: AlertController) {
     console.log('Hello UserServiceProvider Provider');
   }
 
@@ -32,7 +37,7 @@ export class UserService {
         resolve(data);
         console.log(data);
         this.people.push(data);
-        //console.log("Local data ", this.people);
+        console.log("Local data ", this.people);
       }, err => {
         console.log(err);
       });
@@ -48,42 +53,50 @@ export class UserService {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .subscribe(res => {
+        console.log("Inside add FUnc: ",res);
         resolve(res);
-        console.log(res);
       }, (err) => {
         reject(err);
+        this.errorAlert(err);
       });
     });
   }
 
-  addPhoto( photoBase64: string, idPerson: string ){
-    let url = URL_SERVICE + "PERSON/" + idPerson;
+  addPhoto( photoBase64: string, idPerson: string, fileName: string ){
+    let url = URL_SERVICE + "IMAGE/" + idPerson;
 
     return new Promise((resolve, reject) => {
       this.httpClient.post(url, photoBase64, {
         headers: new HttpHeaders().set('Content-Type', 'application/octet-stream')
-                                  .set('Filename', 'Anderson_R.png')
-        //params: new HttpParams().set('id', '3'),
+                                  .set('Filename', fileName+'.png')
       })
       .subscribe(res => {
         resolve(res);
-        console.log(res);
+        this.successAlert('Usuario agregado correctamente.');
       }, (err) => {
         reject(err);
+        this.errorAlert(err);
       });
     });
+
   }
 
-  // getPeople(){
-  //
-  //   let url = URL_SERVICE + "PERSON";
-  //
-  //   this.http.get( url )
-  //            .map( resp => resp.json() )
-  //            .subscribe( data => {
-  //              console.log(data);
-  //            })
-  //
-  // }
+  errorAlert( error: any ) {
+    let alert = this.alertCtrl.create({
+      title: 'Error!',
+      subTitle: JSON.stringify(error),
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  successAlert( success: string ) {
+    let alert = this.alertCtrl.create({
+      title: 'Completado!',
+      subTitle: success,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 }
