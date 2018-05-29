@@ -68,7 +68,7 @@ export class RegisterPage {
                                       this.response.Id,
                                       this.response.Name);
 
-      this.successAlert("Usuario Registrado Correctamente!");
+      this.successAlert("Usuario Registrado Correctamente!" );
       this.navCtrl.push( HomePage );
     }
 

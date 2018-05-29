@@ -54,7 +54,7 @@ export class UserService {
           this.loading.dismiss();
           //this.successAlert('Usuario agregado correctamente.');
           //this.person.push(JSON.stringify(res));
-          this.successAlert( "Registro de asistencia exitoso!" );
+          //this.successAlert( " Registro de asistencia exitoso!" );
         }, (err) => {
           reject(err);
           this.loading.dismiss();
@@ -120,6 +120,7 @@ export class UserService {
 
     let photoAdd = this.b64toBlob(photoBase64);
 
+
     return new Promise((resolve, reject) => {
       this.httpClient.post(url, photoAdd, {
         headers: new HttpHeaders().set('Content-Type', 'application/octet-stream')
@@ -127,12 +128,12 @@ export class UserService {
       })
       .subscribe(res => {
         resolve(res);
-        //this.successAlert('Usuario agregado correctamente.');
+        this.successAlert('Usuario agregado correctamente.');
         this.loading.dismiss();
       }, (err) => {
         reject(err);
-        this.errorAlert("Ha habido un problema agregando la foto de la persona: ( "
-          +JSON.stringify(err)+" )");
+        //this.errorAlert("Ha habido un problema agregando la foto de la persona: ( "
+        //  +JSON.stringify(err)+" )");
         this.loading.dismiss();
       });
 

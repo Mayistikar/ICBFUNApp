@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 
 //plugins
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -32,6 +32,7 @@ export class AttendancePage {
 
   constructor(public navCtrl: NavController,
               private camera: Camera,
+              private alertCtrl: AlertController,
               private userService: UserService) {
   }
 
@@ -59,11 +60,22 @@ export class AttendancePage {
   async checkUser() {
 
     this.response = await this.userService.checkUser( this.photoRawData );
+    this.successAlert(this.response.Name+" Registro de asistencia exitoso!")
     this.navCtrl.push( HomePage );
   }
 
   goHome(){
     this.navCtrl.push( HomePage );
+  }
+
+  //MOSTRANDO MENSAJES
+  successAlert( success: any ) {
+    let alert = this.alertCtrl.create({
+      title: 'Completado!',
+      subTitle: success,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 
