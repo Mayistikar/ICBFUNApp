@@ -1,8 +1,10 @@
 <ion-content padding color="icbf">
 
   <ion-card>
-    <img src="assets/imgs/icbf.png">
+    <img src="assets/imgs/icbf.png"/>
   </ion-card>
+
+  <br>
 
   <ion-list>
 
@@ -10,14 +12,21 @@
       <ion-avatar item-left>
         <img src="assets/imgs/camera.png">
       </ion-avatar>
-      <h1><b>Registro</b></h1>
+      <h1><b>Agregar Usuario</b></h1>
     </ion-item>
 
     <ion-item color="icbf" [navPush]="attendancePage">
       <ion-avatar item-left>
         <img src="assets/imgs/list.png">
       </ion-avatar>
-      <h1><b>Asistencia</b></h1>
+      <h1><b>Registrar Asistencia</b></h1>
+    </ion-item>
+
+    <ion-item color="icbf" [navPush]="profilePage">
+      <ion-avatar item-left>
+        <img src="assets/imgs/bitacora.png">
+      </ion-avatar>
+      <h1><b>Ver Bitácora</b></h1>
     </ion-item>
 
   </ion-list>

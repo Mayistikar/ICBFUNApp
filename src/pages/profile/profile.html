@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar  color="icbf">
+    <ion-title>PERFIL</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list *ngFor=" let person of peopleData">
+
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/noPhoto.png">
+      </ion-thumbnail>
+      <h2>{{ person.Name }}</h2>
+      <p>{{ person.DocumentType }} : {{ person.DocumentId }}</p>
+      <p>Fecha Registro: {{ person.CreatedAt }}</p>
+      <p>Dispositivo Registro: {{ person.DeviceId }}</p>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="goHome()">
+      <ion-icon name="ios-home"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>

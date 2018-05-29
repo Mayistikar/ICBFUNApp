@@ -13,6 +13,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { AttendancePage } from '../pages/attendance/attendance';
+import { ProfilePage } from '../pages/profile/profile';
 
 //plugins
 import { Camera } from '@ionic-native/camera';
@@ -25,7 +26,8 @@ import { UserService } from '../providers/user-service/user-service';
     MyApp,
     HomePage,
     RegisterPage,
-    AttendancePage
+    AttendancePage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { UserService } from '../providers/user-service/user-service';
     MyApp,
     HomePage,
     RegisterPage,
-    AttendancePage
+    AttendancePage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

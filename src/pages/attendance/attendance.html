@@ -8,10 +8,15 @@
 
 
 <ion-content padding>
+
+  <ion-fab right top>
+    <button ion-fab color="primary" (click)="goHome()">
+      <ion-icon name="ios-home"></ion-icon>
+    </button>
+  </ion-fab>
+
   <ion-item *ngIf="photoBase64; else noPhoto">
-    <ion-thumbnail item-start>
-      <img [src]="photoBase64">
-    </ion-thumbnail>
+    <img [src]="photoBase64">
   </ion-item>
 
   <ng-template #noPhoto>
@@ -19,15 +24,11 @@
       <ion-thumbnail item-start>
         <img src="assets/imgs/noPhoto.png">
       </ion-thumbnail>
-
     </ion-card>
   </ng-template>
 
   <button ion-button block round item-left (click)="takePhotoAttendance()">
-    <ion-icon name="camera"></ion-icon>
+    <ion-icon name="camera"> REGISTRAR ASISTENCIA </ion-icon>
   </button>
-  <br>
-  <button ion-button block round item-left (click)="checkUser()">
-    <ion-icon name="ios-search"></ion-icon>Buscar
-  </button>
+
 </ion-content>
