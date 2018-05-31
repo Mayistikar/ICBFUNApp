@@ -9,16 +9,19 @@
 
 <ion-content padding>
 
-  <ion-list *ngFor=" let person of peopleData">
+  <ion-list *ngFor="let personInfo of peopleInfo">
 
     <ion-item>
       <ion-thumbnail item-start>
         <img src="assets/imgs/noPhoto.png">
       </ion-thumbnail>
-      <h2>{{ person.Name }}</h2>
-      <p>{{ person.DocumentType }} : {{ person.DocumentId }}</p>
-      <p>Fecha Registro: {{ person.CreatedAt }}</p>
-      <p>Dispositivo Registro: {{ person.DeviceId }}</p>
+      <h2>{{ personInfo.person.Name }}</h2>
+      <p>{{ personInfo.person.DocumentType }} : {{ personInfo.person.DocumentId }}</p>
+      <p>Fecha Registro: {{ personInfo.person.CreatedAt }}</p>
+      <p>Dispositivo Registro: {{ personInfo.person.DeviceId }}</p>
+      <div *ngFor="let day of peopleInfo.assistance">
+        <h3>Asistió: {{ day.Date }}</h3>
+      </div>
     </ion-item>
 
   </ion-list>

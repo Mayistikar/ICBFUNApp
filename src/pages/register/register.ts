@@ -26,8 +26,7 @@ export class RegisterPage {
     DeviceId: '100111',
     DocumentId: '',
     DocumentType: '',
-    Name: '',
-    Describe: '' //DESCRIBE NO EXISTE EN BASE DE DATOS... HAY QUE AGREGAR
+    Name: ''
   }
 
   response: any;

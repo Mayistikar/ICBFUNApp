@@ -58,8 +58,10 @@ export class UserService {
         }, (err) => {
           reject(err);
           this.loading.dismiss();
+          //this.errorAlert("Ha habido un error en la toma de asistencia, " +
+          //  "por favor inténtelo de nuevo. Error: ( "+JSON.stringify(err)+" )");
           this.errorAlert("Ha habido un error en la toma de asistencia, " +
-            "por favor inténtelo de nuevo. Error: ( "+JSON.stringify(err)+" )");
+            "por favor revise que la fotografía haya capturado su rostro.");
         });
     });
 
@@ -132,8 +134,8 @@ export class UserService {
         this.loading.dismiss();
       }, (err) => {
         reject(err);
-        //this.errorAlert("Ha habido un problema agregando la foto de la persona: ( "
-        //  +JSON.stringify(err)+" )");
+        this.errorAlert("Ha habido un problema agregando la foto de la persona: ( "
+          +JSON.stringify(err)+" )");
         this.loading.dismiss();
       });
 
@@ -167,6 +169,44 @@ export class UserService {
     return blob;
   }
 
+  getAttendance() {
+    let url = URL_SERVICE + "CHECK";
+
+    this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Estamos cargando la lista de asistencia, por favor espere...'
+    });
+
+    this.loading.present();
+
+    return new Promise(resolve => {
+      this.httpClient.get( url )
+        .subscribe(data => {
+          resolve(data);
+          this.loading.dismiss();
+        }, err => {
+          this.errorAlert("Ha habido un problema cargando la lista: ( "
+            +JSON.stringify(err)+" )");
+          this.loading.dismiss();
+        });
+    });
+
+  }
+
+
+  getPersonInfo( personId:string) {
+    let url = URL_SERVICE + "CHECK/" + personId;
+
+    return new Promise(resolve => {
+      this.httpClient.get( url )
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          this.errorAlert("Ha habido un problema cargando la información de la persona...");
+        });
+    });
+
+  }
 
   //MOSTRANDO MENSAJES
 
