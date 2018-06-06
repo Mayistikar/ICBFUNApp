@@ -27,7 +27,11 @@
   </ng-template>
 
   <button ion-button block round item-left (click)="takePhotoRegister()">
-    <ion-icon name="camera"></ion-icon>
+    <ion-thumbnail item-start >
+      <!-- <img src="../../assets/imgStyles/Camera_1_.png"> -->
+      <img src="assets/imgStyles/Camera_1_.png">
+    </ion-thumbnail>
+    <h2><b>Tomar Fotografía</b></h2>
   </button>
 
   <br>
@@ -62,7 +66,11 @@
     <br>
 
     <button ion-button block round item-left (click)="addNewUser()">
-      <ion-icon name="ios-create-outline" item-left></ion-icon> Registrar
+      <ion-thumbnail item-start >
+        <!-- <img src="../../assets/imgStyles/Registrar_1_.png"> -->
+        <img src="assets/imgStyles/Registrar_1_.png">
+      </ion-thumbnail>
+      <h2><b>Registrar</b></h2>
     </button>
 
   </form>

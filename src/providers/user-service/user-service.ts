@@ -56,7 +56,7 @@ export class UserService {
     let url = URL_SERVICE + "CHECK";
     let bodyUnCheck = {
       'IdPerson':idPerson,
-      'AttendanceStatus':'UNCHECKED'
+      'AttendantStatus':'UNCHECKED'
     }
 
     this.loading = this.loadingCtrl.create({
@@ -90,7 +90,7 @@ export class UserService {
     });
   }
 
-  checkUser( photoBase64: any, token:string ){
+  checkUser( photoBase64: any, token:string, idPerson:string ){
     let url = URL_SERVICE + "CHECK";
 
     this.loading = this.loadingCtrl.create({
@@ -107,6 +107,7 @@ export class UserService {
       this.httpClient.post(url, photoCheck, {
         headers: new HttpHeaders()
           .set('SecurityToken', token)
+          .set('IdPerson', idPerson.toString())
           .set('Content-Type', 'application/octet-stream')
           .set('Filename', 'test2.png')
       })
@@ -121,8 +122,7 @@ export class UserService {
           this.loading.dismiss();
           //this.errorAlert("Ha habido un error en la toma de asistencia, " +
           //  "por favor inténtelo de nuevo. Error: ( "+JSON.stringify(err)+" )");
-          this.errorAlert("Ha habido un error en la toma de asistencia, " +
-            "por favor revise que la fotografía haya capturado su rostro.");
+          this.errorStatus(err);
         });
     });
 
@@ -168,7 +168,8 @@ export class UserService {
       }, (err) => {
         console.log("Inside add FUnc: ",err);
         reject(err);
-        this.errorAlert("Ha habido un problema registrando los datos de la persona: ( "+JSON.stringify(err)+" )");
+        this.errorStatus(err);
+        //this.errorAlert("Ha habido un problema registrando los datos de la persona: ( "+JSON.stringify(err)+" )");
       });
     });
   }
@@ -243,7 +244,7 @@ export class UserService {
     });
 
     this.loading.present();
-    //DEPLOY this.successAlert("El token dentro attendance: "+token);
+      //this.successAlert("El token dentro attendance: "+token);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url, {
@@ -286,6 +287,31 @@ export class UserService {
 
     });
 
+  }
+
+  //ADMINISTRANDO ERRORES
+
+  errorStatus( error: any){
+    switch( error.status.toString() ) {
+      case "400": {
+        this.errorAlert("No hemos detectado rostros en la imagen, " +
+          "por favor vuelva a intentarlo.");
+        break;
+      }
+      case "403": {
+        this.errorAlert("El beneficiario de la lista no coincide " +
+          "con la fotografía, por favor vuelva a intentarlo");
+        break;
+      }
+      case "409": {
+        this.errorAlert("Ha sobrepasado la capacidad de registros para este código");
+        break;
+      }
+      default: {
+        this.errorAlert("Se ha presentado un problema, dificil de determinar...");
+        break;
+      }
+    }
   }
 
   //MOSTRANDO MENSAJES

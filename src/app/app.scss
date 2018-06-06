@@ -18,6 +18,18 @@
 
 @charset "utf-8";
 
+.button_link {
+  background-color: #E3E1B8;
+  padding: 2px 4px;
+  font: 13px sans-serif;
+  text-decoration: none;
+  border: 1px solid #000;
+  border-color: #aaa #444 #444 #aaa;
+  color: #000
+}
+
+.button_lilnk:hover { background-color: #46000D; }
+
 .button-text-none {
   text-transform: none;
 }
@@ -751,11 +763,10 @@
   background: url(../assets/imgStyles/Boton_Ingresar.png) no-repeat center center fixed;
   //background-image : url(../assets/imgStyles/Boton_Ingresar.png);
   background-repeat : no-repeat;
-
 }
 .Logo_ICBF
 {
-  background-image : url(Logo_ICBF.png);
+  background-image : url(../assets/imgStyles/Logo_ICBF.png);
   background-repeat : no-repeat;
 }
 .Fondo_6_

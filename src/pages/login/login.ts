@@ -56,8 +56,11 @@ export class LoginPage {
     this.response = await this.userService.getToken(this.hiddenCode);
     this.response.SecurityToken;
     console.log(this.response.Status);
+
     //console.log(JSON.stringify(this.response));
     //console.log(this.userService.getToken(this.hiddenCode)[0]);
+
+
     if ( this.response.Status === "OK" ) {
       this.storage.set('token', this.response.SecurityToken);
       this.navCtrl.push( HomePage, { 'token':this.token } );

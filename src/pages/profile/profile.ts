@@ -28,6 +28,7 @@ export class ProfilePage {
   response: any;
   respUnCheck:any;
   token: string;
+  idPerson:string;
   personView: boolean[] = [];
 
   constructor( public navCtrl: NavController,
@@ -67,6 +68,8 @@ export class ProfilePage {
       //console.log(JSON.stringify( await this.userService.getPersonInfo( personId, this.token )));
       this.peopleInfo.push( await this.userService.getPersonInfo( personId, this.token ) );
 
+      this.personView[personId] = true;
+
       console.log(JSON.stringify(this.peopleInfo[i].person));
     }
 
@@ -76,7 +79,8 @@ export class ProfilePage {
 
   }
 
-  takePhotoAttendance(){
+  takePhotoAttendance( idPerson:string ){
+    this.idPerson = idPerson;
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -98,16 +102,23 @@ export class ProfilePage {
   }
 
   async checkUser() {
-    this.response = await this.userService.checkUser( this.photoRawData, this.token );
+    console.log("Id persona: " + this.idPerson );
+    this.response = await this.userService.checkUser( this.photoRawData, this.token, this.idPerson );
     //this.successAlert(this.response.Name+" Registro de asistencia exitoso!")
-    this.successAlert(" Registro de asistencia exitoso!");
-    this.navCtrl.push( HomePage, { 'token':this.token } );
+    this.successAlert("Registro de asistencia exitoso!");
+
+    this.personView[this.idPerson] = false;
+    //this.navCtrl.push( HomePage, { 'token':this.token } );
+    //this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   async unCheckUser( idPerson:string){
     this.respUnCheck = await this.userService.unCheckUser( idPerson, this.token);
     this.successAlert(" Registro de asistencia exitoso!");
-    this.navCtrl.push( HomePage, { 'token':this.token } );
+    //this.navCtrl.push( HomePage, { 'token':this.token } );
+
+    this.personView[idPerson] = false;
+    //this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   goHome(){
