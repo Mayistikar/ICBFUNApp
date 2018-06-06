@@ -19,6 +19,7 @@ export class UserService {
 
   person:any[] = [];
   loading:any;
+  hideenCode:string;
 
 
 
@@ -30,7 +31,66 @@ export class UserService {
     console.log('Hello UserServiceProvider Provider');
   }
 
-  checkUser( photoBase64: any){
+  setHiddenCode( hCode:string ){
+    this.hideenCode = hCode;
+  }
+
+  getToken( code:string ){
+    let url = URL_SERVICE + "CODE/" + code +"/EXCHANGE";
+
+    return new Promise((resolve, reject) => {
+
+      this.httpClient.post(url,"",{})
+        .subscribe(res => {
+          //console.log("Respuesta: "+ JSON.stringify(res));
+          resolve( res );
+        }, (err) => {
+          reject( err );
+         //this.errorAlert("El token suministrado es invalido!")
+        });
+
+    });
+  }
+
+  unCheckUser( idPerson:string, token:string ){
+    let url = URL_SERVICE + "CHECK";
+    let bodyUnCheck = {
+      'IdPerson':idPerson,
+      'AttendanceStatus':'UNCHECKED'
+    }
+
+    this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Estamos realizando el registro de asistencia, por favor espere...'
+    });
+
+    this.loading.present();
+
+    return new Promise((resolve, reject) => {
+
+      this.httpClient.post(url, bodyUnCheck, {
+        headers: new HttpHeaders()
+          .set('SecurityToken', token)
+          .set('Content-Type', 'application/json')
+      })
+        .subscribe(res => {
+          resolve(res);
+          this.loading.dismiss();
+          //this.successAlert('Usuario agregado correctamente.');
+          //this.person.push(JSON.stringify(res));
+          //this.successAlert( " Registro de asistencia exitoso!" );
+        }, (err) => {
+          reject(err);
+          this.loading.dismiss();
+          //this.errorAlert("Ha habido un error en la toma de asistencia, " +
+          //  "por favor inténtelo de nuevo. Error: ( "+JSON.stringify(err)+" )");
+          this.errorAlert("Ha habido un error en la toma de inasistencia, " +
+            "por favor inténtelo nuevamente.");
+        });
+    });
+  }
+
+  checkUser( photoBase64: any, token:string ){
     let url = URL_SERVICE + "CHECK";
 
     this.loading = this.loadingCtrl.create({
@@ -46,6 +106,7 @@ export class UserService {
 
       this.httpClient.post(url, photoCheck, {
         headers: new HttpHeaders()
+          .set('SecurityToken', token)
           .set('Content-Type', 'application/octet-stream')
           .set('Filename', 'test2.png')
       })
@@ -97,7 +158,9 @@ export class UserService {
 
     return new Promise((resolve, reject) => {
       this.httpClient.post(url, JSON.stringify(data), {
-        headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        headers: new HttpHeaders()
+          .set('SecurityToken', data.DeviceId.toString())
+          .set('Content-Type', 'application/json')
       })
       .subscribe(res => {
         console.log("Inside add FUnc: ",res);
@@ -110,7 +173,7 @@ export class UserService {
     });
   }
 
-  addPhoto( photoBase64: any, idPerson: string, fileName: string ){
+  addPhoto( photoBase64: any, idPerson: string, fileName: string, idDevice: string ){
     let url = URL_SERVICE + "IMAGE/" + idPerson;
 
     this.loading = this.loadingCtrl.create({
@@ -125,12 +188,14 @@ export class UserService {
 
     return new Promise((resolve, reject) => {
       this.httpClient.post(url, photoAdd, {
-        headers: new HttpHeaders().set('Content-Type', 'application/octet-stream')
-                                  .set('Filename', fileName+'.png')
+        headers: new HttpHeaders()
+          .set('SecurityToken', idDevice)
+          .set('Content-Type', 'application/octet-stream')
+          .set('Filename', fileName+'.png')
       })
       .subscribe(res => {
         resolve(res);
-        this.successAlert('Usuario agregado correctamente.');
+        this.successAlert('Fotografía agregada correctamente.');
         this.loading.dismiss();
       }, (err) => {
         reject(err);
@@ -169,8 +234,8 @@ export class UserService {
     return blob;
   }
 
-  getAttendance() {
-    let url = URL_SERVICE + "CHECK";
+  getAttendance( token:string ) {
+    let url = URL_SERVICE + "ATTENDANT";
 
     this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -178,32 +243,47 @@ export class UserService {
     });
 
     this.loading.present();
+    //DEPLOY this.successAlert("El token dentro attendance: "+token);
 
-    return new Promise(resolve => {
-      this.httpClient.get( url )
-        .subscribe(data => {
-          resolve(data);
-          this.loading.dismiss();
-        }, err => {
-          this.errorAlert("Ha habido un problema cargando la lista: ( "
-            +JSON.stringify(err)+" )");
-          this.loading.dismiss();
-        });
-    });
+      return new Promise((resolve, reject) => {
+        this.httpClient.get(url, {
+          headers: new HttpHeaders()
+          //DEPLOY .set('SecurityToken', 'UHQFMIZO')
+          .set('SecurityToken', token)
+        })
+          .subscribe(res => {
+            resolve(res);
+            this.loading.dismiss();
+          }, (err) => {
+            reject(err);
+            this.errorAlert("Ha habido un problema obteniendo la información de los grupos: ( "
+              + JSON.stringify(err) + " )");
+            this.loading.dismiss();
+          });
+
+      });
 
   }
 
 
-  getPersonInfo( personId:string) {
+  getPersonInfo( personId:string, token:string  ) {
     let url = URL_SERVICE + "CHECK/" + personId;
 
-    return new Promise(resolve => {
-      this.httpClient.get( url )
-        .subscribe(data => {
-          resolve(data);
-        }, err => {
-          this.errorAlert("Ha habido un problema cargando la información de la persona...");
+    return new Promise((resolve, reject) => {
+
+      this.httpClient.get(url, {
+        headers: new HttpHeaders()
+        //DEPLOY .set('SecurityToken', 'UHQFMIZO')
+        .set('SecurityToken', token)
+      })
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+          this.errorAlert("Ha habido un problema obteniendo la información del usuario: ( "
+            + JSON.stringify(err) + " )");
         });
+
     });
 
   }

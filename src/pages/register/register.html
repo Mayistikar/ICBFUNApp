@@ -35,15 +35,6 @@
   <form>
 
     <ion-item>
-      <ion-label>Dispositivo: 100112</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Fecha: {{ currentDate.toLocaleDateString('en-GB', optionsDate) }}</ion-label>
-      <ion-label>Hora: {{ currentDate.toLocaleTimeString('en-US', optionsTime) }}</ion-label>
-    </ion-item>
-
-    <ion-item>
       <ion-label>Tipo Documento:</ion-label>
       <ion-select [(ngModel)]="data.DocumentType" name="DocumentType">
         <ion-option value="TI">Tarjeta de Identidad</ion-option>
@@ -59,13 +50,13 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Nombre:</ion-label>
+      <ion-label>Nombres:</ion-label>
       <ion-input type="text" [(ngModel)]="data.Name" name="Name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Características:</ion-label>
-      <ion-input type="text" name="Describe"></ion-input>
+      <ion-label>Apellidos:</ion-label>
+      <ion-input type="text" [(ngModel)]="data.SurName" name="LastNames"></ion-input>
     </ion-item>
 
     <br>

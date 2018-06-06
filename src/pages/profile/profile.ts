@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController,
+         NavParams,
+         LoadingController,
+         AlertController } from 'ionic-angular';
+
+//plugins
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 //pages
 import { HomePage } from '../home/home';
@@ -16,16 +23,27 @@ export class ProfilePage {
   peopleData: any;
   peopleInfo: any[] = [];
   loading: any;
+  photoBase64: any;
+  photoRawData: any;
+  response: any;
+  respUnCheck:any;
+  token: string;
+  personView: boolean[] = [];
 
   constructor( public navCtrl: NavController,
                private userService: UserService,
-               public loadingCtrl: LoadingController) {
+               public loadingCtrl: LoadingController,
+               private navParams: NavParams,
+               private alertCtrl: AlertController,
+               private camera: Camera,) {
+
+
+    this.token = this.navParams.get('token');
+    console.log("Nuevo token profile: ",this.token);
+
     this.loadPeople();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-  }
 
   async loadPeople() {
 
@@ -38,24 +56,72 @@ export class ProfilePage {
 
     this.loading.present();
 
+    console.log("Token antes attendance : ",this.token);
+    this.peopleData = await this.userService.getAttendance( this.token );
+    console.log(JSON.stringify(this.peopleData));
 
-    //this.peopleData = await this.userService.getPeople() ;
-    this.peopleData = await this.userService.getAttendance();
 
     for ( var i in this.peopleData){
       personId = this.peopleData[i].IdPerson;
-      //console.log(JSON.stringify( await this.userService.getPersonInfo( personId )));
-      this.peopleInfo.push( await this.userService.getPersonInfo( personId ) );
+      //console.log( personId );
+      //console.log(JSON.stringify( await this.userService.getPersonInfo( personId, this.token )));
+      this.peopleInfo.push( await this.userService.getPersonInfo( personId, this.token ) );
+
+      console.log(JSON.stringify(this.peopleInfo[i].person));
     }
 
     this.loading.dismiss();
 
-    console.log(JSON.stringify(this.peopleInfo[0].person));
+    //console.log(JSON.stringify(this.peopleInfo));
 
   }
 
+  takePhotoAttendance(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 500,
+      targetHeight: 500
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+
+      this.photoBase64 = 'data:image/png;base64,' + imageData;
+      this.photoRawData = imageData;
+      this.checkUser();
+
+    }, (err) => {
+      console.log("Error en cámara", JSON.stringify(err));
+    });
+  }
+
+  async checkUser() {
+    this.response = await this.userService.checkUser( this.photoRawData, this.token );
+    //this.successAlert(this.response.Name+" Registro de asistencia exitoso!")
+    this.successAlert(" Registro de asistencia exitoso!");
+    this.navCtrl.push( HomePage, { 'token':this.token } );
+  }
+
+  async unCheckUser( idPerson:string){
+    this.respUnCheck = await this.userService.unCheckUser( idPerson, this.token);
+    this.successAlert(" Registro de asistencia exitoso!");
+    this.navCtrl.push( HomePage, { 'token':this.token } );
+  }
+
   goHome(){
-    this.navCtrl.push( HomePage );
+    this.navCtrl.push( HomePage, { 'token':this.token } );
+  }
+
+  //MOSTRANDO MENSAJES
+  successAlert( success: any ) {
+    let alert = this.alertCtrl.create({
+      title: 'Completado!',
+      subTitle: success,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

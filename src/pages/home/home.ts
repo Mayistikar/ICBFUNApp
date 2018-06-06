@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 
 //pages
 import { RegisterPage } from '../register/register';
-import { AttendancePage } from '../attendance/attendance';
 import { ProfilePage } from "../profile/profile";
 
 //components
-import { Platform } from 'ionic-angular';
+import { Platform, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -15,11 +14,13 @@ import { Platform } from 'ionic-angular';
 export class HomePage {
 
   registerPage:any = RegisterPage;
-  attendancePage:any = AttendancePage;
   profilePage: any = ProfilePage;
+  token: string;
 
-  constructor( public platform: Platform ) {
+  constructor( public platform: Platform,
+               private navParams: NavParams ) {
     this.platform = platform;
+    this.token = this.navParams.get('token');
   }
 
   exitApp(){

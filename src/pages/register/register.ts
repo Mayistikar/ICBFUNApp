@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 //plugins
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -19,23 +19,33 @@ export class RegisterPage {
   photoBase64: string = 'No hay foto';
   photoRawData: any;
   currentDate: any;
-  optionsDate = { year: "numeric", month: "2-digit", day: "2-digit" };
-  optionsTime = { hour: "2-digit", minute: "2-digit" };
 
   data = {
-    DeviceId: '100111',
+    DeviceId: '',
     DocumentId: '',
     DocumentType: '',
-    Name: ''
+    Name: '',
+    SurName: '',
   }
 
   response: any;
 
   constructor(public alertCtrl: AlertController,
               public navCtrl: NavController,
+              private navParams: NavParams,
               private camera: Camera,
               private userService: UserService) {
     this.currentDate = new Date();
+
+    this.data.DeviceId = this.navParams.get('token');
+    /*
+    this.storage.get('token').then((val) => {
+      this.data.DeviceId = val;
+      console.log('Token is', val);
+    }); */
+
+    console.log('Token is', this.data.DeviceId);
+    //DEPLOY this.successAlert('Token is' + this.data.DeviceId);
   }
 
   takePhotoRegister(){
@@ -60,21 +70,24 @@ export class RegisterPage {
   async addNewUser(){
 
     if ( this.validateForm() ) {
-      console.log("Data: " + this.data.DocumentType);
+      //console.log("Data: " + this.data.DocumentType);
       this.response = await this.userService.addPerson(this.data);
-      console.log("Data Json: ", this.response.Id);
-      this.response = await this.userService.addPhoto(this.photoRawData,
+      //console.log("Data Json: ", this.response.Id);
+
+      this.response = await this.userService.addPhoto(
+                                      this.photoRawData,
                                       this.response.Id,
-                                      this.response.Name);
+                                      this.response.Name,
+                                      this.data.DeviceId );
 
       this.successAlert("Usuario Registrado Correctamente!" );
-      this.navCtrl.push( HomePage );
+      this.navCtrl.push( HomePage, { 'token':this.data.DeviceId } );
     }
 
   }
 
   goHome(){
-    this.navCtrl.push( HomePage );
+    this.navCtrl.push( HomePage, { 'token':this.data.DeviceId } );
   }
 
 

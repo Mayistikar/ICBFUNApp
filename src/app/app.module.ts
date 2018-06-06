@@ -14,9 +14,11 @@ import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { AttendancePage } from '../pages/attendance/attendance';
 import { ProfilePage } from '../pages/profile/profile';
+import { LoginPage } from "../pages/login/login";
 
 //plugins
 import { Camera } from '@ionic-native/camera';
+import { IonicStorageModule } from '@ionic/storage';
 
 //services
 import { UserService } from '../providers/user-service/user-service';
@@ -27,13 +29,15 @@ import { UserService } from '../providers/user-service/user-service';
     HomePage,
     RegisterPage,
     AttendancePage,
-    ProfilePage
+    ProfilePage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,7 +45,8 @@ import { UserService } from '../providers/user-service/user-service';
     HomePage,
     RegisterPage,
     AttendancePage,
-    ProfilePage
+    ProfilePage,
+    LoginPage
   ],
   providers: [
     StatusBar,

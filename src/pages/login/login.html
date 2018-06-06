@@ -1,0 +1,30 @@
+<ion-content padding color="icbf">
+
+  <ion-card>
+    <img src="assets/imgs/icbf.png"/>
+  </ion-card>
+
+  <br>
+
+  <form>
+
+    <ion-item>
+      <ion-label>Código:</ion-label>
+      <ion-input type="text" [(ngModel)]="hiddenCode" name="HiddenCode"></ion-input>
+    </ion-item>
+
+    <br>
+
+    <button ion-button block round item-left (click)="loginSuccess()">
+      Ingresar
+    </button>
+
+    <br>
+
+    <button ion-button block round item-left (click)="exitApp()">
+      Salir
+    </button>
+
+  </form>
+
+</ion-content>

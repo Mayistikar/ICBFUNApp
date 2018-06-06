@@ -11,17 +11,16 @@
 
   <ion-list *ngFor="let personInfo of peopleInfo">
 
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/noPhoto.png">
+    <ion-item *ngIf="personInfo">
+      <ion-thumbnail item-end (click) = "unCheckUser(personInfo.person.IdPerson)">
+        <img src="assets/imgs/cancel.png">
       </ion-thumbnail>
-      <h2>{{ personInfo.person.Name }}</h2>
-      <p>{{ personInfo.person.DocumentType }} : {{ personInfo.person.DocumentId }}</p>
-      <p>Fecha Registro: {{ personInfo.person.CreatedAt }}</p>
-      <p>Dispositivo Registro: {{ personInfo.person.DeviceId }}</p>
-      <div *ngFor="let day of peopleInfo.assistance">
-        <h3>Asistió: {{ day.Date }}</h3>
-      </div>
+      <ion-thumbnail item-end (click) = "takePhotoAttendance()">
+        <img src="assets/imgs/camera.png">
+      </ion-thumbnail>
+      <h2>{{ personInfo.person.Name }} {{ personInfo.person.SurName }}</h2>
+      <p>{{ personInfo.person.DocumentType }}:{{ personInfo.person.DocumentId }}</p>
+     <!-- <p>{{ personInfo.person.CreatedAt }}</p> -->
     </ion-item>
 
   </ion-list>

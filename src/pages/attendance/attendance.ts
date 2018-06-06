@@ -58,7 +58,7 @@ export class AttendancePage {
   }
 
   async checkUser() {
-    this.response = await this.userService.checkUser( this.photoRawData );
+    this.response = await this.userService.checkUser( this.photoRawData, '' );
     //this.successAlert(this.response.Name+" Registro de asistencia exitoso!")
     this.successAlert(" Registro de asistencia exitoso!");
     this.navCtrl.push( HomePage );
