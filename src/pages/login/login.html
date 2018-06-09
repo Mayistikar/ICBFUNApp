@@ -1,30 +1,35 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<body class="Logo_ICBF">
 <ion-content padding color="icbf">
 
-  <ion-card color="transparent">
-    <img src="assets/imgs/icbf.png"/>
-  </ion-card>
+  <span class=""></span>
 
   <br>
 
-  <form>
+  <ion-img img-placeholder-background="bg-translucid" item-right width="80" height="80" src="../../assets/images/pantalla1/2_logo_ICBF.png"></ion-img>
+  <ion-img class="img_right" img-placeholder-background="bg-translucid" item-right width="80" height="80" src="../../assets/images/pantalla1/3_KID.png"></ion-img>
 
-    <ion-item>
-      <ion-label>Código:</ion-label>
-      <ion-input type="text" [(ngModel)]="hiddenCode" name="HiddenCode"></ion-input>
+  <form>
+    <ion-item class="login">
+      <ion-input placeholder="Ingresar código de seguridad" type="text" [(ngModel)]="hiddenCode" name="HiddenCode" class="Candado"></ion-input>
+      <ion-label> <ion-icon name="md-unlock"></ion-icon> </ion-label>
     </ion-item>
 
     <br>
 
-    <button ion-button block round item-lef (click)="loginSuccess()">
+    <button ion-button block round (click)="loginSuccess()" class="ingresar">
       Ingresar
     </button>
 
     <br>
 
-    <button ion-button block round item-left (click)="exitApp()">
+    <ion-img img-placeholder-background="bg-translucid" item-right width="100" height="100" src="../../assets/images/pantalla1/6_Nina.png"></ion-img>
+
+    <button ion-button block round item-left (click)="exitApp()" hidden>
       Salir
     </button>
 
   </form>
 
 </ion-content>
+</body>

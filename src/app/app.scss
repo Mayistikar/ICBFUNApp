@@ -764,6 +764,16 @@
   //background-image : url(../assets/imgStyles/Boton_Ingresar.png);
   background-repeat : no-repeat;
 }
+.ingresar{
+  height: 70px;
+  width: 60%;
+  margin-left: 20%;
+  background-color: #258749;
+  border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+}
 .Logo_ICBF
 {
   background-image : url(../assets/imgStyles/Logo_ICBF.png);
@@ -791,6 +801,14 @@
 {
   background-image : url(Candado.png);
   background-repeat : no-repeat;
+  width: 5%;
+}
+.login{
+  border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+height: 70px;
 }
 .Boton_Ingresar_Codigo
 {
