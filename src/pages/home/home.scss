@@ -16,3 +16,35 @@ page-home {
     margin-left: 70%;
     width: 100%;
 }
+
+.button_option
+{
+	border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+  height: 70px;
+  color: gray;
+  background-color: white;
+  
+}
+
+.Boton_Salir_home
+{
+  height: 70px;
+  width: 60%;
+  margin-left: 20%;
+  background-color: #258749;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+  color : white;
+  background-image : url('../assets/images/home/5_Boton_Salir.png');
+  background-repeat : no-repeat;
+}
+
+
+.label_pad{
+	padding-left: 8px;
+}
