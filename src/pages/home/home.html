@@ -1,38 +1,39 @@
-<ion-content padding color="icbf">
+<ion-content>
 
+
+  <div class="body_home">
+
+  <ion-img img-placeholder-background="bg-translucid" item-right width="100" height="100" src="../../assets/images/home/2_logo_ICBF.png">    
+  </ion-img>
+  <br><br>
   
 
+  <button ion-button block round color="dark" [navPush]="registerPage"
+              [navParams]="{ 'token':token }"  class="button_option" >     
+      <ion-label>
+        <ion-icon name="md-person-add"></ion-icon>
+      Enrolar Beneficiario.
+    </ion-label>      
+  </button>
+  <br>
+  
+  <button ion-button block round  [navPush]="profilePage"
+              [navParams]="{ 'token':token }" class="button_option" >
+    <ion-label>
+      <ion-icon name="md-list-box"></ion-icon>    
+      Registrar Asistencia
+    </ion-label>    
+    
+  </button>
   <br>
 
-  <ion-img img-placeholder-background="bg-translucid" item-right width="80" height="80" src="../../assets/images/pantalla1/2_logo_ICBF.png"></ion-img>
+  <button (click) = "exitApp()" class="Boton_Salir_home"> 
+    salir
+  </button>
 
-  <ion-list>
+  <br>
+  <ion-img img-placeholder-background="bg-translucid"  width="100" height="100" src="../../assets/images/home/Nina_Inferior.png"></ion-img>
 
-    <ion-item color="icbf"
-              [navPush]="registerPage"
-              [navParams]="{ 'token':token }">
-      <ion-avatar item-left>
-        <img src="assets/imgs/camera.png">
-      </ion-avatar>
-      <h1><b>Agregar Usuario</b></h1>
-    </ion-item>
-
-    <ion-item color="icbf"
-              [navPush]="profilePage"
-              [navParams]="{ 'token':token }">
-      <ion-avatar item-left>
-        <img src="assets/imgs/list.png">
-      </ion-avatar>
-      <h1><b>Registrar Asistencia</b></h1>
-    </ion-item>
-
-    <ion-item color="icbf" (click) = "exitApp()">
-      <ion-avatar item-left>
-        <img src="assets/imgs/exit.png">
-      </ion-avatar>
-      <h1><b>Salir</b></h1>
-    </ion-item>
-
-  </ion-list>
+  </div>
 
 </ion-content>

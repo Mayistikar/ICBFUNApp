@@ -11,9 +11,92 @@ page-login {
   }
 }
 
-.img_right {
-    display: block;
-    margin-left: 70%;
-    width: 100%;
+.body_log{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("../../assets/images/logging/Decorativos.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
 }
 
+.img_girl {
+  position: absolute;
+  width: 60vw;
+  height:  25vh;
+  background-image: url("../../assets/images/logging/6_Nina.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 0;
+  bottom: 0;
+}
+
+.logo_icbf {
+  position: relative;
+  background-image: url("../../assets/images/logging/Logo_ICBF.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 14vmax;
+  height: 18vmax;
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+.img_kid {
+
+  float: right;
+  margin-top: 24vh;
+  margin-right: 5%;
+
+  background-image: url("../../assets/images/logging/Nino.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  width: 38vw;
+  height: 40vw;
+
+}
+
+.form-log{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.login{
+  position: relative;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+
+  background-image: url("../../assets/images/logging/Candado.png");
+  background-size: 12% 60%;
+  background-repeat: no-repeat;
+  background-position: 4% center;
+
+  border: 0px solid #000000;
+  height: 15vw;
+  padding-left: 20vw;
+
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+.ingresar{
+  height: 10vh;
+  width: 60%;
+  margin-left: 20%;
+  background-color: #258749;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+
+  font-size: 4vw;
+
+}

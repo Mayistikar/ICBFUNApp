@@ -1,20 +1,36 @@
 <ion-header>
 
-  <ion-navbar color="icbf">
+ <ion-navbar color="icbf">
     <ion-title><b>REGISTRO</b></ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goHome()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
+
+  <!--<ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Page Title
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>-->
 
 </ion-header>
 
 
-<ion-content padding>
-
-
-  <ion-fab right top>
-    <button ion-fab color="primary" (click)="goHome()">
-      <ion-icon name="ios-home"></ion-icon>
-    </button>
-  </ion-fab>
+<ion-content padding color="icbf">
 
   <ion-card *ngIf="photoRawData; else noPhoto">
     <img [src]="photoBase64">
@@ -26,19 +42,18 @@
     </ion-card>
   </ng-template>
 
-  <button ion-button block round item-left (click)="takePhotoRegister()">
+  <button ion-button full item-left (click)="takePhotoRegister()" class="button_camera" >
     <ion-thumbnail item-start >
       <!-- <img src="../../assets/imgStyles/Camera_1_.png"> -->
-      <img src="assets/imgStyles/Camera_1_.png">
+      <img src="assets/images/registro/Camera.png">
     </ion-thumbnail>
     <h2><b>Tomar Fotografía</b></h2>
   </button>
 
-  <br>
-
   <form>
 
-    <ion-item>
+    <ion-item ion-item>
+      <ion-icon name="card" item-start></ion-icon>
       <ion-label>Tipo Documento:</ion-label>
       <ion-select [(ngModel)]="data.DocumentType" name="DocumentType">
         <ion-option value="TI">Tarjeta de Identidad</ion-option>
@@ -48,29 +63,40 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Documento:</ion-label>
+    <ion-item ion-item>
+       <ion-icon name="contact" item-start></ion-icon>
+      <ion-label >       
+      Documento:</ion-label>
       <ion-input type="text" [(ngModel)]="data.DocumentId" name="DocumentId"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item ion-item>
+      <ion-icon name="list" item-start></ion-icon>  
       <ion-label>Nombres:</ion-label>
       <ion-input type="text" [(ngModel)]="data.Name" name="Name"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item ion-item>
+      <ion-icon name="list" item-start></ion-icon>  
       <ion-label>Apellidos:</ion-label>
       <ion-input type="text" [(ngModel)]="data.SurName" name="LastNames"></ion-input>
     </ion-item>
 
-    <br>
-
-    <button ion-button block round item-left (click)="addNewUser()">
+    <button ion-button full item-left (click)="addNewUser()" class="button_camera">
       <ion-thumbnail item-start >
         <!-- <img src="../../assets/imgStyles/Registrar_1_.png"> -->
-        <img src="assets/imgStyles/Registrar_1_.png">
+        <img src="assets/images/registro/Registrar.png">
       </ion-thumbnail>
       <h2><b>Registrar</b></h2>
+    </button>
+
+    <button ion-button full item-left class="button_camera">
+     
+      <ion-thumbnail item-start >
+        <!-- <img src="../../assets/imgStyles/Registrar_1_.png"> -->
+        <img src="assets/images/registro/cancel.png">
+      </ion-thumbnail>
+      <h2><b>cancelar</b></h2>
     </button>
 
   </form>
