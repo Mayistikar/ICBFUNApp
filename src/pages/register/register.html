@@ -35,7 +35,7 @@
   <div class="body_register">
 
   <ion-item *ngIf="photoRawData; else noPhoto"
-            class="div_noPhoto">
+            class="div_photo">
     <img [src]="photoBase64">
   </ion-item>
 
@@ -47,16 +47,17 @@
 
   <button ion-button
           full item-left
+          color="secondary"
           (click)="takePhotoRegister()"
           class="boton_foto" >
     Tomar fotografía
   </button>
 
-  <form>
+  <form class="form_registrar">
 
     <ion-item ion-item
               class="input_tipoDoc">
-      <ion-label>Tipo Documento:</ion-label>
+      <ion-label>Tipo de Documento:</ion-label>
       <ion-select [(ngModel)]="data.DocumentType" name="DocumentType">
         <ion-option value="TI">Tarjeta de Identidad</ion-option>
         <ion-option value="RC">Registro Civil</ion-option>
@@ -65,40 +66,38 @@
       </ion-select>
     </ion-item>
 
-    <ion-item ion-item>
-       <ion-icon name="contact" item-start></ion-icon>
-      <ion-label >
-      Documento:</ion-label>
+    <ion-item ion-item
+              class="input_doc">
+      <ion-label>Documento:</ion-label>
       <ion-input type="text" [(ngModel)]="data.DocumentId" name="DocumentId"></ion-input>
     </ion-item>
 
-    <ion-item ion-item>
-      <ion-icon name="list" item-start></ion-icon>
+    <ion-item ion-item
+              class="input_nombres">
       <ion-label>Nombres:</ion-label>
       <ion-input type="text" [(ngModel)]="data.Name" name="Name"></ion-input>
     </ion-item>
 
-    <ion-item ion-item>
-      <ion-icon name="list" item-start></ion-icon>
+    <ion-item ion-item
+              class="input_apellidos">
       <ion-label>Apellidos:</ion-label>
       <ion-input type="text" [(ngModel)]="data.SurName" name="LastNames"></ion-input>
     </ion-item>
 
-    <button ion-button full item-left (click)="addNewUser()" class="button_camera">
-      <ion-thumbnail item-start >
-        <!-- <img src="../../assets/imgStyles/Registrar_1_.png"> -->
-        <img src="assets/images/registro/Registrar.png">
-      </ion-thumbnail>
-      <h2><b>Registrar</b></h2>
+    <button ion-button
+            full item-left
+            color="secondary"
+            (click)="addNewUser()"
+            class="boton_registrar">
+      Registrar
     </button>
 
-    <button ion-button full item-left class="button_camera">
-
-      <ion-thumbnail item-start >
-        <!-- <img src="../../assets/imgStyles/Registrar_1_.png"> -->
-        <img src="assets/images/registro/cancel.png">
-      </ion-thumbnail>
-      <h2><b>cancelar</b></h2>
+    <button ion-button
+            full item-left
+            color="secondary"
+            (click)="goHome()"
+            class="boton_cancelar">
+      cancelar
     </button>
 
   </form>

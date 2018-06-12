@@ -23,9 +23,18 @@ page-register {
   height: 100vh;
 }
 
+.div_photo{
+  position: relative;
+  background-color: transparent;
+  margin: auto;
+  width: 50%;
+  height: 30vh;
+}
+
 .div_noPhoto {
   position: relative;
   background-color: transparent;
+  color: transparent;
   padding: 0;
   width: 100vw;
   height: 30vh;
@@ -65,8 +74,75 @@ page-register {
   font-size: 3vw;
 
   background-image: url("../../assets/images/registro/Tipo_Doc.png");
-  background-size: 10% 60%;
+  background-size: 8% 50%;
   background-repeat: no-repeat;
   background-position: 5% center;
   padding-left: 18vw;
+}
+
+.input_doc {
+  height: 8vh;
+  box-shadow: 3px 3px 20px 0;
+  color: gray;
+  font-size: 3vw;
+
+  background-image: url("../../assets/images/registro/ID.png");
+  background-size: 7% 50%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+  padding-left: 18vw;
+}
+
+.input_nombres {
+  height: 8vh;
+  box-shadow: 3px 3px 20px 0;
+  color: gray;
+  font-size: 3vw;
+
+  background-image: url("../../assets/images/registro/Name.png");
+  background-size: 7% 50%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+  padding-left: 18vw;
+}
+
+.input_apellidos {
+  height: 8vh;
+  box-shadow: 3px 3px 20px 0;
+  color: gray;
+  font-size: 3vw;
+
+  background-image: url("../../assets/images/registro/Name.png");
+  background-size: 7% 50%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+  padding-left: 18vw;
+}
+
+.boton_registrar {
+  height: 9vh;
+  background-color: #258749;
+
+  background-image: url("../../assets/images/registro/Registrar.png");
+  background-size: 10% 60%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+
+  font-size: 5vw;
+
+  text-transform: none;
+}
+
+.boton_cancelar {
+  height: 9vh;
+  background-color: #258749;
+
+  background-image: url("../../assets/images/registro/Cancel.png");
+  background-size: 10% 60%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+
+  font-size: 5vw;
+
+  text-transform: none;
 }

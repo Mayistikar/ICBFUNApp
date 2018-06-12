@@ -105,7 +105,8 @@ export class RegisterPage {
     let errorAlert = this.alertCtrl.create({
       title: 'Error!',
       subTitle: error,
-      buttons: ['OK']
+      buttons: ['OK'],
+      cssClass: 'alertCustomErrors' // <- added this
     });
     errorAlert.present();
   }

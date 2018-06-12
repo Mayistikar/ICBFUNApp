@@ -83,7 +83,8 @@ export class LoginPage {
     let alert = this.alertCtrl.create({
       title: 'Error!',
       subTitle: error,
-      buttons: ['OK']
+      buttons: ['OK'],
+      cssClass: 'alertCustomErrors' // <- added this
     });
     alert.present();
   }
