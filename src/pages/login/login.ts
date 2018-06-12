@@ -53,24 +53,33 @@ export class LoginPage {
   async loginSuccess(){
 
     /*
+
     console.log( "My Code: "+this.hiddenCode );
 
-    this.response = await this.userService.getToken(this.hiddenCode);
-    this.response.SecurityToken;
-    console.log(this.response.Status);
+    //this.response = await this.userService.getToken(this.hiddenCode);
+    //this.response.then(
 
-    //console.log(JSON.stringify(this.response));
-    //console.log(this.userService.getToken(this.hiddenCode)[0]);
+    await this.userService.getToken(this.hiddenCode).then(
+      () => {
+        this.response.SecurityToken;
+        console.log(this.response.Status);
 
+        //console.log(JSON.stringify(this.response));
+        //console.log(this.userService.getToken(this.hiddenCode)[0]);
 
-    if ( this.response.Status === "OK" ) {
-      this.storage.set('token', this.response.SecurityToken);
-      this.navCtrl.push( HomePage, { 'token':this.token } );
-    }else{
+        if (this.response.Status === "OK") {
+          this.storage.set('token', this.response.SecurityToken);
+          this.navCtrl.push(HomePage, {'token': this.token});
+        } else {
+          this.errorAlert("Ha ingresado un código inválido!");
+        }
+
+      }).catch(()=> {
       this.errorAlert("Ha ingresado un código inválido!");
-    } */
+    });
+    */
 
-     this.navCtrl.push( HomePage, { 'token':'UHQFMIZO' } );
+    this.navCtrl.push( HomePage, { 'token':'UHQFMIZO' } );
 
   }
 

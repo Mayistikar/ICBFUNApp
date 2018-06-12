@@ -35,18 +35,17 @@ export class UserService {
     this.hideenCode = hCode;
   }
 
-  getToken( code:string ){
+  getToken( code:string = "00000000000"){
     let url = URL_SERVICE + "CODE/" + code +"/EXCHANGE";
-
     return new Promise((resolve, reject) => {
 
       this.httpClient.post(url,"",{})
         .subscribe(res => {
-          //console.log("Respuesta: "+ JSON.stringify(res));
+          console.log("Respuesta: "+ JSON.stringify(res));
           resolve( res );
         }, (err) => {
           reject( err );
-         //this.errorAlert("El token suministrado es invalido!")
+          //this.errorAlert("El token suministrado es invalido!")
         });
 
     });
@@ -249,7 +248,6 @@ export class UserService {
       return new Promise((resolve, reject) => {
         this.httpClient.get(url, {
           headers: new HttpHeaders()
-          //DEPLOY .set('SecurityToken', 'UHQFMIZO')
           .set('SecurityToken', token)
         })
           .subscribe(res => {
@@ -274,7 +272,6 @@ export class UserService {
 
       this.httpClient.get(url, {
         headers: new HttpHeaders()
-        //DEPLOY .set('SecurityToken', 'UHQFMIZO')
         .set('SecurityToken', token)
       })
         .subscribe(res => {
@@ -286,7 +283,6 @@ export class UserService {
         });
 
     });
-
   }
 
   //ADMINISTRANDO ERRORES

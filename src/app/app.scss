@@ -45,6 +45,7 @@
 
     background-color: #32db64;
 
+    //background-image: url("../assets/imgs/Chica_Alerta.png");
     background-image: url("../assets/imgs/Chica_Alerta.png");
     background-size: 30vw 100%;
     background-repeat: no-repeat;
@@ -58,6 +59,67 @@
     font-size: large;
   }
 }
+
+
+.alertCustomFatalErrors {
+  // text color for basic alerts
+  color: white;
+
+  // alert modal page bg color. Warning this will remove the alert transparency
+  // background-color: #258749;
+
+  button {
+    color: white !important; // button text color
+    font-size: 4vw;
+    //background-color: color($colors, secondary, base) !important;
+    //button bg color
+  }
+
+  .alert-message {
+    color: white; // text color for confirm alerts
+  }
+
+  .alert-wrapper {
+
+    padding-left: 20vw;
+
+    width: 90vw;
+    height: 30vh;
+
+    background-color: #32db64;
+
+    //background-image: url("../assets/imgs/Chica_Alerta.png");
+    background-image: url("../assets/imgs/Chica_Alerta.png");
+    background-size: 30vw 100%;
+    background-repeat: no-repeat;
+    background-position: left center;
+
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+
+    font-size: large;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .button_link {
   background-color: #E3E1B8;

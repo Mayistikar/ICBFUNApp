@@ -59,18 +59,19 @@ export class ProfilePage {
 
     console.log("Token antes attendance : ",this.token);
     this.peopleData = await this.userService.getAttendance( this.token );
-    console.log(JSON.stringify(this.peopleData));
+
+    //console.log(JSON.stringify(this.peopleData));
 
 
     for ( var i in this.peopleData){
       personId = this.peopleData[i].IdPerson;
       //console.log( personId );
-      //console.log(JSON.stringify( await this.userService.getPersonInfo( personId, this.token )));
-      this.peopleInfo.push( await this.userService.getPersonInfo( personId, this.token ) );
+      console.log(JSON.stringify( await this.userService.getPersonInfo( personId, this.token )));
+      //this.peopleInfo.push( await this.userService.getPersonInfo( personId, this.token ) );
 
       this.personView[personId] = true;
 
-      console.log(JSON.stringify(this.peopleInfo[i].person));
+      //console.log(JSON.stringify(this.peopleInfo[i].person));
     }
 
     this.loading.dismiss();
@@ -124,6 +125,8 @@ export class ProfilePage {
   goHome(){
     this.navCtrl.push( HomePage, { 'token':this.token } );
   }
+
+
 
   //MOSTRANDO MENSAJES
   successAlert( success: any ) {

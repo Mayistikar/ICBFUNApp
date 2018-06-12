@@ -15,7 +15,8 @@ page-register {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url("../../assets/images/registro/Decoradores_3.png");
+  //background-image: url("../../assets/images/registro/Decoradores_3.png");
+  background-image: url("../assets/images/registro/Decoradores_3.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -39,9 +40,11 @@ page-register {
   width: 100vw;
   height: 30vh;
 }
+
 .no_photo {
   position: absolute;
-  background-image: url("../../assets/images/registro/Sin_Foto.png");
+  //background-image: url("../../assets/images/registro/Sin_Foto.png");
+  background-image: url("../../assets/images/registro/Foto_Temporal.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -57,7 +60,8 @@ page-register {
   height: 9vh;
   background-color: #258749;
 
-  background-image: url("../../assets/images/registro/Camera.png");
+  //background-image: url("../../assets/images/registro/Camera.png");
+  background-image: url("../assets/images/registro/Camera.png");
   background-size: 10% 60%;
   background-repeat: no-repeat;
   background-position: 5% center;
@@ -73,7 +77,8 @@ page-register {
   color: gray;
   font-size: 3vw;
 
-  background-image: url("../../assets/images/registro/Tipo_Doc.png");
+  //background-image: url("../../assets/images/registro/Tipo_Doc.png");
+  background-image: url("../assets/images/registro/Tipo_Doc.png");
   background-size: 8% 50%;
   background-repeat: no-repeat;
   background-position: 5% center;
@@ -86,7 +91,8 @@ page-register {
   color: gray;
   font-size: 3vw;
 
-  background-image: url("../../assets/images/registro/ID.png");
+  //background-image: url("../../assets/images/registro/ID.png");
+  background-image: url("../assets/images/registro/ID.png");
   background-size: 7% 50%;
   background-repeat: no-repeat;
   background-position: 5% center;
@@ -99,7 +105,8 @@ page-register {
   color: gray;
   font-size: 3vw;
 
-  background-image: url("../../assets/images/registro/Name.png");
+  //background-image: url("../../assets/images/registro/Name.png");
+  background-image: url("../assets/images/registro/Name.png");
   background-size: 7% 50%;
   background-repeat: no-repeat;
   background-position: 5% center;
@@ -112,7 +119,8 @@ page-register {
   color: gray;
   font-size: 3vw;
 
-  background-image: url("../../assets/images/registro/Name.png");
+  //background-image: url("../../assets/images/registro/Name.png");
+  background-image: url("../assets/images/registro/Name.png");
   background-size: 7% 50%;
   background-repeat: no-repeat;
   background-position: 5% center;
@@ -123,7 +131,8 @@ page-register {
   height: 9vh;
   background-color: #258749;
 
-  background-image: url("../../assets/images/registro/Registrar.png");
+  //background-image: url("../../assets/images/registro/Registrar.png");
+  background-image: url("../assets/images/registro/Registrar.png");
   background-size: 10% 60%;
   background-repeat: no-repeat;
   background-position: 5% center;
@@ -137,7 +146,8 @@ page-register {
   height: 9vh;
   background-color: #258749;
 
-  background-image: url("../../assets/images/registro/Cancel.png");
+  //background-image: url("../../assets/images/registro/Cancel.png");
+  background-image: url("../assets/images/registro/Cancel.png");
   background-size: 10% 60%;
   background-repeat: no-repeat;
   background-position: 5% center;
