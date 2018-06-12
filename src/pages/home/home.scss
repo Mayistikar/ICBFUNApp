@@ -15,7 +15,7 @@ page-home {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url("../../assets/images/logging/Decorativos.png");
+  background-image: url("../../assets/images/home/Decorativos_2.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -23,40 +23,100 @@ page-home {
   height: 100vh;
 }
 
-.img_right {
-    display: block;
-    margin-left: 70%;
-    width: 100%;
+.img_girl_bottom {
+  position: absolute;
+  width: 45vw;
+  height:  24vh;
+  background-image: url("../../assets/images/home/Nina_Inferior.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 28vw;
+  bottom: 0;
 }
 
-.button_option
-{
+.logo_icbf {
+  position: relative;
+  background-image: url("../../assets/images/home/Logo_ICBF.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 14vmax;
+  height: 18vmax;
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+.boton_enrolar {
+  height: 9vh;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 16vh;
 	border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
+
+  background-image: url("../../assets/images/home/Icono_Nino.png");
+  background-size: 7% 60%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+
   border: 0px solid #000000;
-  height: 70px;
+  padding-left: 16vw;
+
+  box-shadow: 3px 3px 20px 0;
   color: gray;
   background-color: white;
-  
+
+  font-size: 4vw;
+  font-weight: bold;
+  text-align: left;
+
+  text-transform: none;
 }
 
-.Boton_Salir_home
-{
-  height: 70px;
+.boton_asistencia {
+  height: 9vh;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 3vh;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+
+  background-image: url("../../assets/images/home/Icono_Registrar.png");
+  background-size: 7% 60%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+
+  border: 0px solid #000000;
+  padding-left: 16vw;
+
+  box-shadow: 3px 3px 20px 0;
+  color: gray;
+  background-color: white;
+
+  font-size: 4vw;
+  font-weight: bold;
+  text-align: left;
+
+  text-transform: none;
+}
+
+.boton_salir_home{
+  height: 9vh;
   width: 60%;
   margin-left: 20%;
+  margin-top: 3vh;
+
   background-color: #258749;
   border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
   border: 0px solid #000000;
-  color : white;
-  background-image : url('../assets/images/home/5_Boton_Salir.png');
-  background-repeat : no-repeat;
+
+  font-size: 4vw;
+
+  text-transform: none;
 }
 
-
-.label_pad{
-	padding-left: 8px;
-}

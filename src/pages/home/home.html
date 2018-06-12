@@ -2,37 +2,41 @@
 
 
   <div class="body_home">
-
-  <ion-img img-placeholder-background="bg-translucid" item-right width="100" height="100" src="../../assets/images/home/2_logo_ICBF.png">    
-  </ion-img>
+    <ion-img class="logo_icbf" img-placeholder-background="bg-translucid"></ion-img>
   <br><br>
-  
 
-  <button ion-button block round color="dark" [navPush]="registerPage"
-              [navParams]="{ 'token':token }"  class="button_option" >     
+
+  <button ion-button
+          color="secondary"
+          [navPush]="registerPage"
+          [navParams]="{ 'token':token }"
+          class="boton_enrolar" >
       <ion-label>
-        <ion-icon name="md-person-add"></ion-icon>
-      Enrolar Beneficiario.
-    </ion-label>      
+      Enrolar beneficiario
+    </ion-label>
   </button>
-  <br>
-  
-  <button ion-button block round  [navPush]="profilePage"
-              [navParams]="{ 'token':token }" class="button_option" >
+
+  <button ion-button
+          color="secondary"
+          [navPush]="profilePage"
+          [navParams]="{ 'token':token }"
+          class="boton_asistencia" >
     <ion-label>
-      <ion-icon name="md-list-box"></ion-icon>    
-      Registrar Asistencia
-    </ion-label>    
-    
+      Registrar asistencia
+    </ion-label>
   </button>
   <br>
 
-  <button (click) = "exitApp()" class="Boton_Salir_home"> 
-    salir
+  <button ion-button
+          color="secondary"
+          (click) = "exitApp()"
+          class="boton_salir_home">
+    Salir
   </button>
-
   <br>
-  <ion-img img-placeholder-background="bg-translucid"  width="100" height="100" src="../../assets/images/home/Nina_Inferior.png"></ion-img>
+  <ion-img class="img_girl_bottom"
+           img-placeholder-background="bg-translucid">
+  </ion-img>
 
   </div>
 

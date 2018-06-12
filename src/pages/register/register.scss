@@ -1,12 +1,72 @@
 page-register {
-
   ion-content{
-    background-color: #72BF44 !important;
+    background : -moz-linear-gradient(50% 0% -90deg,rgba(133, 223, 79, 1) 0%,rgba(86, 187, 81, 1) 100%);
+    background : -webkit-linear-gradient(-90deg, rgba(133, 223, 79, 1) 0%, rgba(86, 187, 81, 1) 100%);
+    background : -webkit-gradient(linear,50% 0% ,50% 100% ,color-stop(0,rgba(133, 223, 79, 1) ),color-stop(1,rgba(86, 187, 81, 1) ));
+    background : -o-linear-gradient(-90deg, rgba(133, 223, 79, 1) 0%, rgba(86, 187, 81, 1) 100%);
+    background : -ms-linear-gradient(-90deg, rgba(133, 223, 79, 1) 0%, rgba(86, 187, 81, 1) 100%);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#85DF4F', endColorstr='#56BB51' ,GradientType=0)";
+    background : linear-gradient(180deg, rgba(133, 223, 79, 1) 0%, rgba(86, 187, 81, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#85DF4F',endColorstr='#56BB51' , GradientType=0);
   }
 }
 
-.button_camera
-{
-  color: white;
-  background-color: rgb(37,153,73);
+.body_register{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("../../assets/images/registro/Decoradores_3.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.div_noPhoto {
+  position: relative;
+  background-color: transparent;
+  padding: 0;
+  width: 100vw;
+  height: 30vh;
+}
+.no_photo {
+  position: absolute;
+  background-image: url("../../assets/images/registro/Sin_Foto.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 50vw;
+  height: 30vh;
+  border: 0px;
+  color: transparent;
+  top: 0;
+  margin-left: 25vw;
+}
+
+.boton_foto {
+  height: 9vh;
+  background-color: #258749;
+
+  background-image: url("../../assets/images/registro/Camera.png");
+  background-size: 10% 60%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+
+  font-size: 5vw;
+
+  text-transform: none;
+}
+
+.input_tipoDoc {
+  height: 8vh;
+  box-shadow: 3px 3px 20px 0;
+  color: gray;
+  font-size: 3vw;
+
+  background-image: url("../../assets/images/registro/Tipo_Doc.png");
+  background-size: 10% 60%;
+  background-repeat: no-repeat;
+  background-position: 5% center;
+  padding-left: 18vw;
 }

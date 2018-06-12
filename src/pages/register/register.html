@@ -1,7 +1,7 @@
 <ion-header>
 
  <ion-navbar color="icbf">
-    <ion-title><b>REGISTRO</b></ion-title>
+    <ion-title><b>Enrolamiento</b></ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="goHome()">
@@ -30,30 +30,32 @@
 </ion-header>
 
 
-<ion-content padding color="icbf">
+<ion-content>
 
-  <ion-card *ngIf="photoRawData; else noPhoto">
+  <div class="body_register">
+
+  <ion-item *ngIf="photoRawData; else noPhoto"
+            class="div_noPhoto">
     <img [src]="photoBase64">
-  </ion-card>
+  </ion-item>
 
   <ng-template #noPhoto>
-    <ion-card>
-        <img src="assets/imgs/noPhoto.png">
-    </ion-card>
+    <ion-item class="div_noPhoto">
+      <img class="no_photo" img-placeholder-background="bg-translucid">
+    </ion-item>
   </ng-template>
 
-  <button ion-button full item-left (click)="takePhotoRegister()" class="button_camera" >
-    <ion-thumbnail item-start >
-      <!-- <img src="../../assets/imgStyles/Camera_1_.png"> -->
-      <img src="assets/images/registro/Camera.png">
-    </ion-thumbnail>
-    <h2><b>Tomar Fotografía</b></h2>
+  <button ion-button
+          full item-left
+          (click)="takePhotoRegister()"
+          class="boton_foto" >
+    Tomar fotografía
   </button>
 
   <form>
 
-    <ion-item ion-item>
-      <ion-icon name="card" item-start></ion-icon>
+    <ion-item ion-item
+              class="input_tipoDoc">
       <ion-label>Tipo Documento:</ion-label>
       <ion-select [(ngModel)]="data.DocumentType" name="DocumentType">
         <ion-option value="TI">Tarjeta de Identidad</ion-option>
@@ -65,19 +67,19 @@
 
     <ion-item ion-item>
        <ion-icon name="contact" item-start></ion-icon>
-      <ion-label >       
+      <ion-label >
       Documento:</ion-label>
       <ion-input type="text" [(ngModel)]="data.DocumentId" name="DocumentId"></ion-input>
     </ion-item>
 
     <ion-item ion-item>
-      <ion-icon name="list" item-start></ion-icon>  
+      <ion-icon name="list" item-start></ion-icon>
       <ion-label>Nombres:</ion-label>
       <ion-input type="text" [(ngModel)]="data.Name" name="Name"></ion-input>
     </ion-item>
 
     <ion-item ion-item>
-      <ion-icon name="list" item-start></ion-icon>  
+      <ion-icon name="list" item-start></ion-icon>
       <ion-label>Apellidos:</ion-label>
       <ion-input type="text" [(ngModel)]="data.SurName" name="LastNames"></ion-input>
     </ion-item>
@@ -91,7 +93,7 @@
     </button>
 
     <button ion-button full item-left class="button_camera">
-     
+
       <ion-thumbnail item-start >
         <!-- <img src="../../assets/imgStyles/Registrar_1_.png"> -->
         <img src="assets/images/registro/cancel.png">
@@ -100,5 +102,7 @@
     </button>
 
   </form>
+
+  </div>
 
 </ion-content>
