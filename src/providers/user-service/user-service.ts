@@ -198,7 +198,7 @@ export class UserService {
       }, (err) => {
         this.loading.dismiss();
         reject(err);
-        console.log(JSON.stringify(err));
+        //console.log(JSON.stringify(err));
         this.errorStatus(err);
       });
     });
@@ -337,8 +337,12 @@ export class UserService {
         break;
       }
       case 400: {
-        this.errorAlert("No hemos detectado rostros en la imagen, " +
-          "por favor vuelva a intentarlo.");
+        if( error.error.internal_status === "INTEGRITY_ERROR"){
+          this.errorAlert("El número de documento del beneficiario ya se encuentra registrado!" );
+        } else {
+          this.errorAlert("No hemos detectado rostros en la imagen, " +
+            "por favor vuelva a intentarlo.");
+        }
         break;
       }
       case 403: {

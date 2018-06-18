@@ -66,10 +66,10 @@ export class ProfilePage {
       })
 
     try {
-      console.log(JSON.stringify(this.peopleData));
+      //console.log(JSON.stringify(this.peopleData));
       //Deploy console.log(this.peopleData[0].IdGroup);
 
-      if (this.peopleData !== null){
+      if (this.peopleData.length > 0){
 
         this.groupList = await this.userService.getGroupList(
           this.userService.getDateFormated(),
@@ -77,8 +77,11 @@ export class ProfilePage {
           this.token
         );
         this.existList = true;
+      } else {
+        this.successAlert("Aún no hay beneficiarios registrados");
       }
     }catch (e) {
+
       this.errorAlert("No podemos conectarnos con el servidor, " +
         "por favor revise la conexión a internet");
     }
@@ -183,12 +186,32 @@ export class ProfilePage {
   }
 
 
+
+  //ADMINISTRANDO ERRORES
+  adminErrors(error: any){
+    switch ( error.internal_status ){
+      case "NO_DATA_FOUND":
+        this.errorAlert("Ha ingresado un código inválido, por favor intente nuevamente.");
+        break;
+
+      case "CODE_USED":
+        this.errorAlert("Es probable que el código ingresado, ya haya sido utilizado antes, por favor " +
+          "contacte al administrador!");
+        break;
+      default:
+        this.errorAlert("El servidor está procesando muchas peticiones, por favor intente nuevamente " +
+          "en 15 minutos");
+        break;
+    }
+  }
+
   //MOSTRANDO MENSAJES
   successAlert( success: any ) {
     let alert = this.alertCtrl.create({
       title: 'Completado!',
       subTitle: success,
-      buttons: ['OK']
+      buttons: ['OK'],
+      cssClass: 'alertCustomErrors'
     });
     alert.present();
   }
