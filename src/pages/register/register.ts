@@ -28,7 +28,7 @@ export class RegisterPage {
     SurName: '',
   }
 
-  response: any;
+  response: any = null;
 
   constructor(public alertCtrl: AlertController,
               public navCtrl: NavController,
@@ -38,14 +38,7 @@ export class RegisterPage {
     this.currentDate = new Date();
 
     this.data.DeviceId = this.navParams.get('token');
-    /*
-    this.storage.get('token').then((val) => {
-      this.data.DeviceId = val;
-      console.log('Token is', val);
-    }); */
-
-    console.log('Token is', this.data.DeviceId);
-    //DEPLOY this.successAlert('Token is' + this.data.DeviceId);
+    //DEPLOY console.log('Token is', this.data.DeviceId);
   }
 
   takePhotoRegister(){
@@ -56,7 +49,7 @@ export class RegisterPage {
       mediaType: this.camera.MediaType.PICTURE,
       targetWidth: 500,
       targetHeight: 500
-    }
+    };
 
     this.camera.getPicture(options).then((imageData) => {
      // If it's base64:
@@ -70,18 +63,31 @@ export class RegisterPage {
   async addNewUser(){
 
     if ( this.validateForm() ) {
-      //console.log("Data: " + this.data.DocumentType);
-      this.response = await this.userService.addPerson(this.data);
-      //console.log("Data Json: ", this.response.Id);
 
-      this.response = await this.userService.addPhoto(
-                                      this.photoRawData,
-                                      this.response.Id,
-                                      this.response.Name,
-                                      this.data.DeviceId );
+      await this.userService.addPerson(this.data)
+        .then((res)=>{
+          this.response = res;
+        }).catch((err)=>{
+          //Do nothing
+        });
 
-      this.successAlert("Usuario Registrado Correctamente!" );
-      this.navCtrl.push( HomePage, { 'token':this.data.DeviceId } );
+
+      if ( this.response !== null ){
+
+        await this.userService.addPhoto(  this.photoRawData,
+                                          this.response.Id,
+                                          this.response.Name,
+                                          this.data.DeviceId )
+          .then((res)=>{
+            this.successAlert("Beneficiario registrado correctamente!" );
+          }).catch((err)=>{
+            //Do nothing
+          });
+
+        this.navCtrl.push( HomePage, { 'token':this.data.DeviceId } );
+
+      }
+
     }
 
   }
@@ -96,7 +102,8 @@ export class RegisterPage {
     let successAlert = this.alertCtrl.create({
       title: 'Completado!',
       subTitle: success,
-      buttons: ['OK']
+      buttons: ['OK'],
+      cssClass: 'alertCustomErrors'
     });
     successAlert.present();
   }

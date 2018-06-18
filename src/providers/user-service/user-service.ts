@@ -20,6 +20,7 @@ export class UserService {
   person:any[] = [];
   loading:any;
   hideenCode:string;
+  todayDate:any;
 
 
 
@@ -36,18 +37,42 @@ export class UserService {
   }
 
   getToken( code:string = "00000000000"){
+
     let url = URL_SERVICE + "CODE/" + code +"/EXCHANGE";
     return new Promise((resolve, reject) => {
 
       this.httpClient.post(url,"",{})
         .subscribe(res => {
-          console.log("Respuesta: "+ JSON.stringify(res));
+          //console.log("Respuesta: "+ JSON.stringify(res));
           resolve( res );
         }, (err) => {
           reject( err );
           //this.errorAlert("El token suministrado es invalido!")
         });
+    });
+  }
 
+  resetAttendance( idPerson:string, token:string ){
+
+    console.log("RESET ATT EXECUTED!!!!!!");
+    let url = URL_SERVICE + "CHECK";
+    let bodyUnCheck = {
+      'IdPerson':idPerson,
+      'AttendantStatus':null
+    };
+
+    return new Promise((resolve, reject) => {
+
+      this.httpClient.post(url, bodyUnCheck, {
+        headers: new HttpHeaders()
+          .set('SecurityToken', token)
+          .set('Content-Type', 'application/json')
+      })
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
     });
   }
 
@@ -56,7 +81,7 @@ export class UserService {
     let bodyUnCheck = {
       'IdPerson':idPerson,
       'AttendantStatus':'UNCHECKED'
-    }
+    };
 
     this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -113,9 +138,7 @@ export class UserService {
         .subscribe(res => {
           resolve(res);
           this.loading.dismiss();
-          //this.successAlert('Usuario agregado correctamente.');
-          //this.person.push(JSON.stringify(res));
-          //this.successAlert( " Registro de asistencia exitoso!" );
+
         }, (err) => {
           reject(err);
           this.loading.dismiss();
@@ -155,36 +178,45 @@ export class UserService {
   addPerson( data: any ){
     let url = URL_SERVICE + "PERSON";
 
+    this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Estamos registrando los datos del beneficiario...'
+    });
+
+    this.loading.present();
+
     return new Promise((resolve, reject) => {
+
       this.httpClient.post(url, JSON.stringify(data), {
         headers: new HttpHeaders()
           .set('SecurityToken', data.DeviceId.toString())
           .set('Content-Type', 'application/json')
       })
       .subscribe(res => {
-        console.log("Inside add FUnc: ",res);
+        this.loading.dismiss();
         resolve(res);
       }, (err) => {
-        console.log("Inside add FUnc: ",err);
+        this.loading.dismiss();
         reject(err);
+        console.log(JSON.stringify(err));
         this.errorStatus(err);
-        //this.errorAlert("Ha habido un problema registrando los datos de la persona: ( "+JSON.stringify(err)+" )");
       });
     });
   }
 
   addPhoto( photoBase64: any, idPerson: string, fileName: string, idDevice: string ){
+
+    console.log("Agregando fotografía");
     let url = URL_SERVICE + "IMAGE/" + idPerson;
 
     this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Estamos realizando el registro...'
+      content: 'Estamos realizando el registro de la fotografía...'
     });
 
     this.loading.present();
 
     let photoAdd = this.b64toBlob(photoBase64);
-
 
     return new Promise((resolve, reject) => {
       this.httpClient.post(url, photoAdd, {
@@ -194,74 +226,60 @@ export class UserService {
           .set('Filename', fileName+'.png')
       })
       .subscribe(res => {
+        this.loading.dismiss();
         resolve(res);
-        this.successAlert('Fotografía agregada correctamente.');
-        this.loading.dismiss();
       }, (err) => {
-        reject(err);
-        this.errorAlert("Ha habido un problema agregando la foto de la persona: ( "
-          +JSON.stringify(err)+" )");
         this.loading.dismiss();
+        reject(err);
+        //DEPLOY this.errorAlert("Ha habido un problema agregando la foto de la persona: ( +JSON.stringify(err)+" )");
       });
 
     });
 
   }
 
-
   //PROCESANDO IMAGEN
   b64toBlob(b64Data) {
-    var contentType = '';
-    var sliceSize = 512;
+    let contentType = '';
+    let sliceSize = 512;
 
-    var byteCharacters = atob(b64Data);
-    var byteArrays = [];
+    let byteCharacters = atob(b64Data);
+    let byteArrays = [];
 
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      var slice = byteCharacters.slice(offset, offset + sliceSize);
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      let slice = byteCharacters.slice(offset, offset + sliceSize);
 
-      var byteNumbers = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
+      let byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
         byteNumbers[i] = slice.charCodeAt(i);
       }
 
-      var byteArray = new Uint8Array(byteNumbers);
+      let byteArray = new Uint8Array(byteNumbers);
 
       byteArrays.push(byteArray);
     }
 
-    var blob = new Blob(byteArrays, {type: contentType});
-    return blob;
+    return new Blob(byteArrays, {type: contentType});
+    //return blob;
   }
 
   getAttendance( token:string ) {
     let url = URL_SERVICE + "ATTENDANT";
 
-    this.loading = this.loadingCtrl.create({
-      spinner: 'bubbles',
-      content: 'Estamos cargando la lista de asistencia, por favor espere...'
-    });
-
-    this.loading.present();
-      //this.successAlert("El token dentro attendance: "+token);
-
       return new Promise((resolve, reject) => {
+
         this.httpClient.get(url, {
           headers: new HttpHeaders()
           .set('SecurityToken', token)
         })
           .subscribe(res => {
             resolve(res);
-            this.loading.dismiss();
           }, (err) => {
             reject(err);
-            this.errorAlert("Ha habido un problema obteniendo la información de los grupos: ( "
-              + JSON.stringify(err) + " )");
-            this.loading.dismiss();
+            this.errorStatus(err);
           });
 
       });
-
   }
 
 
@@ -285,22 +303,60 @@ export class UserService {
     });
   }
 
-  //ADMINISTRANDO ERRORES
+  getGroupList( dateToday:string, group:string, token:string  ) {
+    let url = URL_SERVICE+"GROUP/"+group+"/SESSION/"+dateToday;
 
+    return new Promise((resolve, reject) => {
+
+      this.httpClient.get(url, {
+        headers: new HttpHeaders()
+          .set('SecurityToken', token)
+      })
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+          this.errorAlert("Ha habido un problema obteniendo el grupo de asistencia: "
+            + JSON.stringify(err) + " )");
+        });
+
+    });
+  }
+
+  //ADMINISTRANDO ERRORES
   errorStatus( error: any){
-    switch( error.status.toString() ) {
-      case "400": {
+
+    if( error.error.internal_status === "UNKNOWN_GROUP"){
+      error.status = 801
+    }
+
+    switch( error.status ) {
+      case 0:{
+        this.errorAlert("No hemos podido conectarnos a internet, " +
+          "por favor revise su conexión!");
+        break;
+      }
+      case 400: {
         this.errorAlert("No hemos detectado rostros en la imagen, " +
           "por favor vuelva a intentarlo.");
         break;
       }
-      case "403": {
+      case 403: {
         this.errorAlert("El beneficiario de la lista no coincide " +
           "con la fotografía, por favor vuelva a intentarlo");
         break;
       }
-      case "409": {
+      case 409: {
         this.errorAlert("Ha sobrepasado la capacidad de registros para este código");
+        break;
+      }
+      case 500:{
+        console.log(error);
+        this.errorAlert("El documento ingresado, ya se encuentra registrado!");
+        break;
+      }
+      case 801:{
+        this.errorAlert("El código actual no tiene registrado un grupo correspondiente!");
         break;
       }
       default: {
@@ -308,6 +364,25 @@ export class UserService {
         break;
       }
     }
+
+  }
+
+  //CALCULANDO FECHAS
+  getDateFormated(){
+    this.todayDate = new Date();
+    let mm = this.todayDate.getMonth()+1;
+    let dd = this.todayDate.getDate();
+    let yyyy = this.todayDate.getFullYear();
+
+    if( dd < 10){
+      dd = '0'+dd;
+    }
+
+    if( mm < 10){
+      mm = '0'+mm;
+    }
+
+    return yyyy+"-"+mm+"-"+dd;
   }
 
   //MOSTRANDO MENSAJES
@@ -316,7 +391,8 @@ export class UserService {
     let alert = this.alertCtrl.create({
       title: 'Error!',
       subTitle: error,
-      buttons: ['OK']
+      buttons: ['OK'],
+      cssClass: 'alertCustomFatalErrors'
     });
     alert.present();
   }
@@ -325,7 +401,8 @@ export class UserService {
     let alert = this.alertCtrl.create({
       title: 'Completado!',
       subTitle: success,
-      buttons: ['OK']
+      buttons: ['OK'],
+      cssClass: 'alertCustomErrors'
     });
     alert.present();
   }

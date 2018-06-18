@@ -4,16 +4,21 @@
     <ion-title>Asistencia</ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="goHome()">
+      <button ion-button
+              icon-only
+              (click)="goHome()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
+
+  <!--
 
   <ion-list *ngFor="let personInfo of peopleInfo">
 
@@ -27,10 +32,64 @@
       </ion-thumbnail>
       <h2 class="nombre_info">{{ personInfo.person.Name }} {{ personInfo.person.SurName }}</h2>
       <p>{{ personInfo.person.DocumentType }}:{{ personInfo.person.DocumentId }}</p>
-      <!-- <p>{{ personInfo.assistance[-1].toString() }}</p>
-      <!-- <p>{{ personInfo.person.CreatedAt }}</p> -->
     </ion-item>
 
   </ion-list>
+
+  -->
+
+
+  <ion-list *ngFor="let personInfo of groupList">
+
+    <ion-item *ngIf=" personInfo.status === null "
+              class="perfil_sin_asistencia">
+
+      <ion-thumbnail item-end (click) = "unCheckUser(personInfo.person.Id)">
+        <img src="assets/imgs/cancel.png">
+      </ion-thumbnail>
+
+      <ion-thumbnail item-end (click) = "takePhotoAttendance(personInfo.person.Id)">
+        <img src="assets/imgs/camera.png">
+      </ion-thumbnail>
+
+      <h2 class="nombre_info">{{ personInfo.person.Name }} {{ personInfo.person.SurName }}</h2>
+      <p>{{ personInfo.person.DocumentType }}: {{ personInfo.person.DocumentId }}</p>
+
+    </ion-item>
+
+    <ion-item *ngIf=" personInfo.status === 'UNCHECKED' "
+              class="perfil_no_asistio">
+
+      <ion-thumbnail item-end>
+        <img src="assets/imgs/sad.png">
+      </ion-thumbnail>
+
+      <h1>No Asistió</h1>
+      <h2 class="nombre_info">{{ personInfo.person.Name }} {{ personInfo.person.SurName }}</h2>
+      <p>{{ personInfo.person.DocumentType }}:{{ personInfo.person.DocumentId }}</p>
+
+    </ion-item>
+
+    <ion-item *ngIf=" personInfo.status === 'CHECKED' "
+              class="perfil_asistio">
+
+      <ion-thumbnail item-end>
+        <img src="assets/imgs/happy.png">
+      </ion-thumbnail>
+
+      <h1>Asistió</h1>
+      <h2 class="nombre_info">{{ personInfo.person.Name }} {{ personInfo.person.SurName }}</h2>
+      <p class="nombre_info">{{ personInfo.person.DocumentType }}:{{ personInfo.person.DocumentId }}</p>
+
+    </ion-item>
+
+  </ion-list>
+
+  <button *ngIf="existList"
+          ion-button
+          color="danger"
+          (click)="resetAttendance()"
+          class="resetButton">REINICIAR ASISTENCIA!
+  </button>
 
 </ion-content>

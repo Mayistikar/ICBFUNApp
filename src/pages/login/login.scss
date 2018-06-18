@@ -24,19 +24,6 @@ page-login {
   height: 100vh;
 }
 
-.img_girl {
-  position: absolute;
-  width: 60vw;
-  height:  25vh;
-  //background-image: url("../../assets/images/logging/6_Nina.png");
-  background-image: url("../assets/images/logging/6_Nina.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  left: 0;
-  bottom: 0;
-}
-
 .logo_icbf {
   position: relative;
   //background-image: url("../../assets/images/logging/Logo_ICBF.png");
@@ -107,4 +94,18 @@ page-login {
 
   text-transform: none;
 
+}
+
+.img_girl {
+  position: absolute;
+  width: 60vw;
+  height:  25vh;
+  //background-image: url("../../assets/images/logging/6_Nina.png");
+  background-image: url("../assets/images/logging/6_Nina.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
 }
